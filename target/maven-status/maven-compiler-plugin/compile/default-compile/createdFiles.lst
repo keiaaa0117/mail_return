@@ -1,0 +1,7 @@
+com\example\mail_return\controller\CreateMailController.class
+com\example\mail_return\repository\MailRepository.class
+com\example\mail_return\dto\request\CreateMailRequest.class
+com\example\mail_return\dto\response\CreateMailResponse.class
+com\example\mail_return\MailReturnApplication.class
+com\example\mail_return\entity\MailEntity.class
+com\example\mail_return\service\CreateMailService.class

@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Edit Mail</title>
+  </head>
+  <body>
+    <h1>Edit Mail</h1>
+
+    <form
+      th:action="@{/mail/edit/{id}(id=${mailForm.id})}"
+      th:object="${mailForm}"
+      method="post"
+    >
+      <input type="hidden" th:field="*{id}" />
+      <div>Subject: <input type="text" th:field="*{subject}" /></div>
+      <div>Message: <textarea th:field="*{message}"></textarea></div>
+      <button type="submit">Update</button>
+    </form>
+
+    <p>
+      <a th:href="@{/mail/list}"><button type="button">Back</button></a>
+    </p>
+  </body>
+</html>

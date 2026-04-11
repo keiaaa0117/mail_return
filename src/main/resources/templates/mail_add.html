@@ -1,0 +1,20 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Mail</title>
+  </head>
+  <body>
+    <h1>Create Mail</h1>
+
+    <form th:action="@{/mail/create}" th:object="${mailForm}" method="post">
+      <div>Subject: <input type="text" th:field="*{subject}" /></div>
+      <div>Message: <textarea th:field="*{message}"></textarea></div>
+      <button type="submit">Save</button>
+    </form>
+
+    <p>
+      <a th:href="@{/mail/list}"><button type="button">Back</button></a>
+    </p>
+  </body>
+</html>
