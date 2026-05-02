@@ -1,6 +1,8 @@
 package com.example.mail_return;
 
+import com.example.mail_return.repository.MailRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,14 @@ class MailTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private MailRepository mailRepository;
+
+    @BeforeEach
+    void setUp() {
+        mailRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("メール作成API: 正常系")

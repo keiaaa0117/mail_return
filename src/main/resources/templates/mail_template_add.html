@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Mail Template</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <h1>Add Mail Template</h1>
+
+    <form
+      th:action="@{/mail/template/create}"
+      th:object="${mailTemplateForm}"
+      method="post"
+    >
+      <div>
+        Template Name:
+        <input type="text" th:field="*{templateName}" />
+      </div>
+      <div>
+        Template Text:
+        <textarea th:field="*{templateText}"></textarea>
+      </div>
+      <button type="submit">Save</button>
+    </form>
+
+    <p>
+      <a th:href="@{/mail/template/list}">
+        <button type="button">Back</button>
+      </a>
+    </p>
+  </body>
+</html>

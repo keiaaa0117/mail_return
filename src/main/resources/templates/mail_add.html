@@ -9,6 +9,17 @@
 
     <form th:action="@{/mail/create}" th:object="${mailForm}" method="post">
       <div>Subject: <input type="text" th:field="*{subject}" /></div>
+      <div>
+        Template:
+        <select id="templateSelect">
+          <option value="">Select template</option>
+          <option
+            th:each="template : ${templateList}"
+            th:value="${template.templateId}"
+            th:text="${template.templateName}"
+          ></option>
+        </select>
+      </div>
       <div>Message: <textarea th:field="*{message}"></textarea></div>
       <button type="submit">Save</button>
     </form>
@@ -16,5 +27,6 @@
     <p>
       <a th:href="@{/mail/list}"><button type="button">Back</button></a>
     </p>
+    <script th:src="@{/js/mail-template.js}"></script>
   </body>
 </html>

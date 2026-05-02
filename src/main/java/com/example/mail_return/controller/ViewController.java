@@ -7,6 +7,7 @@ import com.example.mail_return.repository.MailRepository;
 import com.example.mail_return.service.CreateMailService;
 import com.example.mail_return.service.DeleteMailService;
 import com.example.mail_return.service.GetMailListService;
+import com.example.mail_return.service.GetMailTemplateListService;
 import com.example.mail_return.service.UpdateMailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,18 +26,21 @@ public class ViewController {
     private final UpdateMailService updateMailService;
     private final DeleteMailService deleteMailService;
     private final MailRepository mailRepository;
+    private final GetMailTemplateListService getMailTemplateListService;
 
     public ViewController(
             GetMailListService getMailListService,
             CreateMailService createMailService,
             UpdateMailService updateMailService,
             DeleteMailService deleteMailService,
-            MailRepository mailRepository) {
+            MailRepository mailRepository,
+            GetMailTemplateListService getMailTemplateListService) {
         this.getMailListService = getMailListService;
         this.createMailService = createMailService;
         this.updateMailService = updateMailService;
         this.deleteMailService = deleteMailService;
         this.mailRepository = mailRepository;
+        this.getMailTemplateListService = getMailTemplateListService;
     }
 
     @GetMapping({"/", "/mail/list"})
@@ -48,6 +52,7 @@ public class ViewController {
     @GetMapping("/mail/create")
     public String showCreateForm(Model model) {
         model.addAttribute("mailForm", new MailForm());
+        model.addAttribute("templateList", getMailTemplateListService.getActiveTemplates());
         return "mail_add";
     }
 

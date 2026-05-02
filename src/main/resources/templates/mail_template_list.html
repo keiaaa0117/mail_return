@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mail Template List</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <h1>Mail Template List</h1>
+
+    <p>
+      <a th:href="@{/mail/template/create}">
+        <button type="button">Add Template</button>
+      </a>
+      <a th:href="@{/mail/list}">
+        <button type="button">Back</button>
+      </a>
+    </p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Template ID</th>
+          <th>Template Name</th>
+          <th>Template Text</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:if="${#lists.isEmpty(templateList)}">
+          <td colspan="4">No template found.</td>
+        </tr>
+        <tr th:each="template : ${templateList}">
+          <td th:text="${template.templateId}"></td>
+          <td th:text="${template.templateName}"></td>
+          <td class="template-text" th:text="${template.templateText}"></td>
+          <td>
+            <a
+              th:href="@{/mail/template/edit/{id}(id=${template.templateId})}"
+            >
+              <button type="button">Edit</button>
+            </a>
+            <form
+              th:action="@{/mail/template/delete/{id}(id=${template.templateId})}"
+              method="post"
+              class="inline-form"
+            >
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
