@@ -2,54 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Mail Template List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>メールテンプレート一覧</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body>
-    <h1>Mail Template List</h1>
+    <main class="page-shell">
+      <header class="page-header">
+        <h1>メールテンプレート一覧</h1>
 
-    <p>
-      <a th:href="@{/mail/template/create}">
-        <button type="button">Add Template</button>
-      </a>
-      <a th:href="@{/mail/list}">
-        <button type="button">Back</button>
-      </a>
-    </p>
+        <nav class="page-actions" aria-label="テンプレート操作">
+          <a class="button button-primary" th:href="@{/mail/template/create}">
+            テンプレート追加
+          </a>
+          <a class="button button-ghost" th:href="@{/mail/list}">戻る</a>
+        </nav>
+      </header>
 
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Template ID</th>
-          <th>Template Name</th>
-          <th>Template Text</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:if="${#lists.isEmpty(templateList)}">
-          <td colspan="4">No template found.</td>
-        </tr>
-        <tr th:each="template : ${templateList}">
-          <td th:text="${template.templateId}"></td>
-          <td th:text="${template.templateName}"></td>
-          <td class="template-text" th:text="${template.templateText}"></td>
-          <td>
-            <a
-              th:href="@{/mail/template/edit/{id}(id=${template.templateId})}"
-            >
-              <button type="button">Edit</button>
-            </a>
-            <form
-              th:action="@{/mail/template/delete/{id}(id=${template.templateId})}"
-              method="post"
-              class="inline-form"
-            >
-              <button type="submit">Delete</button>
-            </form>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <section class="table-panel">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>テンプレート番号</th>
+              <th>テンプレート名</th>
+              <th>テンプレート本文</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:if="${#lists.isEmpty(templateList)}">
+              <td class="empty-state" colspan="4">テンプレートがありません。</td>
+            </tr>
+            <tr th:each="template : ${templateList}">
+              <td
+                class="id-cell"
+                data-label="テンプレート番号"
+                th:text="${template.templateId}"
+              ></td>
+              <td data-label="テンプレート名" th:text="${template.templateName}"></td>
+              <td
+                class="template-text"
+                data-label="テンプレート本文"
+                th:text="${template.templateText}"
+              ></td>
+              <td class="actions-cell" data-label="操作">
+                <a
+                  class="button button-outline"
+                  th:href="@{/mail/template/edit/{id}(id=${template.templateId})}"
+                >
+                  編集
+                </a>
+                <form
+                  th:action="@{/mail/template/delete/{id}(id=${template.templateId})}"
+                  method="post"
+                  class="inline-form"
+                >
+                  <button class="button button-danger" type="submit">削除</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
   </body>
 </html>

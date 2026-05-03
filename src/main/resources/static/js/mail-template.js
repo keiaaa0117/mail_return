@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/api/mail/template?templateId=" + encodeURIComponent(templateId))
       .then(function (response) {
         if (!response.ok) {
-          throw new Error("Failed to load template.");
+          throw new Error("テンプレートの読み込みに失敗しました。");
         }
         return response.json();
       })
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         messageInput.value = template.templateText;
       })
       .catch(function () {
-        alert("Failed to load template.");
+        alert("テンプレートの読み込みに失敗しました。");
       });
   });
 });

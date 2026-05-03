@@ -2,24 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Edit Mail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>メール編集</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body>
-    <h1>Edit Mail</h1>
+    <main class="page-shell">
+      <header class="page-header">
+        <h1>メール編集</h1>
+        <nav class="page-actions" aria-label="メール操作">
+          <a class="button button-ghost" th:href="@{/mail/list}">戻る</a>
+        </nav>
+      </header>
 
-    <form
-      th:action="@{/mail/edit/{id}(id=${mailForm.id})}"
-      th:object="${mailForm}"
-      method="post"
-    >
-      <input type="hidden" th:field="*{id}" />
-      <div>Subject: <input type="text" th:field="*{subject}" /></div>
-      <div>Message: <textarea th:field="*{message}"></textarea></div>
-      <button type="submit">Update</button>
-    </form>
-
-    <p>
-      <a th:href="@{/mail/list}"><button type="button">Back</button></a>
-    </p>
+      <section class="form-panel">
+        <form
+          class="app-form"
+          th:action="@{/mail/edit/{id}(id=${mailForm.id})}"
+          th:object="${mailForm}"
+          method="post"
+        >
+          <input type="hidden" th:field="*{id}" />
+          <div class="form-field">
+            <label for="subject">件名</label>
+            <input type="text" th:field="*{subject}" />
+          </div>
+          <div class="form-field">
+            <label for="message">本文</label>
+            <textarea th:field="*{message}"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="button button-primary" type="submit">更新</button>
+          </div>
+        </form>
+      </section>
+    </main>
   </body>
 </html>

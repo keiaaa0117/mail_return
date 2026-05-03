@@ -2,33 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Edit Mail Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>メールテンプレート編集</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
   </head>
   <body>
-    <h1>Edit Mail Template</h1>
+    <main class="page-shell">
+      <header class="page-header">
+        <h1>メールテンプレート編集</h1>
+        <nav class="page-actions" aria-label="テンプレート操作">
+          <a class="button button-ghost" th:href="@{/mail/template/list}">戻る</a>
+        </nav>
+      </header>
 
-    <form
-      th:action="@{/mail/template/edit/{id}(id=${mailTemplateForm.templateId})}"
-      th:object="${mailTemplateForm}"
-      method="post"
-    >
-      <input type="hidden" th:field="*{templateId}" />
-      <div>
-        Template Name:
-        <input type="text" th:field="*{templateName}" />
-      </div>
-      <div>
-        Template Text:
-        <textarea th:field="*{templateText}"></textarea>
-      </div>
-      <button type="submit">Update</button>
-    </form>
-
-    <p>
-      <a th:href="@{/mail/template/list}">
-        <button type="button">Back</button>
-      </a>
-    </p>
+      <section class="form-panel">
+        <form
+          class="app-form"
+          th:action="@{/mail/template/edit/{id}(id=${mailTemplateForm.templateId})}"
+          th:object="${mailTemplateForm}"
+          method="post"
+        >
+          <input type="hidden" th:field="*{templateId}" />
+          <div class="form-field">
+            <label for="templateName">テンプレート名</label>
+            <input type="text" th:field="*{templateName}" />
+          </div>
+          <div class="form-field">
+            <label for="templateText">テンプレート本文</label>
+            <textarea th:field="*{templateText}"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="button button-primary" type="submit">更新</button>
+          </div>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
